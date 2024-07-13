@@ -1,5 +1,5 @@
-import { store } from 'quasar/wrappers'
-import { createPinia } from 'pinia'
+import { store } from "quasar/wrappers";
+import { createPinia } from "pinia";
 
 /*
  * If not building with SSR mode, you can
@@ -10,11 +10,15 @@ import { createPinia } from 'pinia'
  * with the Store instance.
  */
 
+import Airtable from "./plugins/airtable";
+
 export default store((/* { ssrContext } */) => {
-  const pinia = createPinia()
+  const pinia = createPinia();
 
   // You can add Pinia plugins here
   // pinia.use(SomePiniaPlugin)
 
-  return pinia
-})
+  pinia.use(Airtable);
+
+  return pinia;
+});

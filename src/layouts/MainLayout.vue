@@ -2,55 +2,38 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleDrawer" class="lt-md" />
 
         <q-toolbar-title>
           Bla Real Estate
         </q-toolbar-title>
-
-        <div>v{{ $q.version }}</div>
+        <q-space></q-space>
+        <q-btn @click="modalOpen = !modalOpen" icon="add" flat>Create Appointment</q-btn>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        
-      </q-list>
-    </q-drawer>
+    <bla-drawer v-model="drawerOpen"></bla-drawer>
 
     <q-page-container>
       <router-view />
+      <bla-modal-appointment-form v-model="modalOpen"></bla-modal-appointment-form>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import BlaDrawer from 'src/components/BlaDrawer.vue'
+import BlaModalAppointmentForm from 'src/components/BlaModalAppointmentForm.vue'
 
 defineOptions({
   name: 'MainLayout'
 })
 
-const leftDrawerOpen = ref(false)
+const drawerOpen = ref(false);
+const modalOpen = ref(false);
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+function toggleDrawer() {
+  drawerOpen.value = !drawerOpen.value
 }
 </script>
